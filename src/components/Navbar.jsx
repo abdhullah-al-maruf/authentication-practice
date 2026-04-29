@@ -56,7 +56,8 @@ console.log(user);
           </>
 
           <>
-            <span className="text-sm"> {user?.name}</span>
+            <span className="text-sm block"> {user?.name}</span>
+            <p>{user?.email}</p>
             <button
               onClick={handleLogout}
               className="rounded bg-red-500 px-3 py-1 text-white text-sm"
