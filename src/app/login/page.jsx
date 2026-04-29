@@ -1,5 +1,5 @@
 "use client";
-
+import { authClient } from "@/lib/auth-client"; //import the auth client
 import { Check } from "@gravity-ui/icons";
 import {
   Button,
@@ -13,12 +13,29 @@ import {
 
 const LoginPage = () => {
   // this function will get data from form submit
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const name=e.target.name.value;
+
     const email=e.target.email.value;
     const password=e.target.password.value;
-    console.log(name,email,password);
+    const { data, error } = await authClient.signIn.email({
+       
+        email,
+      
+        password,
+      
+        callbackURL: "/",
+     
+        rememberMe: true
+},
+{
+     onError: (ctx) => {
+          // display the error message
+          alert(ctx.error.message);
+        },
+}
+)
+console.log(data,error);
   };
   
   return (
